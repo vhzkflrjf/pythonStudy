@@ -18,7 +18,6 @@ def execute_noThread(number):
     print(threading.currentThread().getName(), number)
 
 
-
 if __name__ == '__main__':
     for i in range(1,36): # 1 ~ 7 실행
         my_thread = threading.Thread(target=execute, args=(i,))
