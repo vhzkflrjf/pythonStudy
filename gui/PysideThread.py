@@ -3,10 +3,21 @@ import time
 
 class Worker(QtCore.QObject):
     error = QtCore.Signal()
+    
+    A = []
+
+    triger = Signal(str)
+
+    def __init__(self):
+        super().__init__()
+
+    def noti (self, parameter_list):
+        A.append = [newdata]
 
     @QtCore.Slot(str)
     def moveLeftIncrement(self, controller):
         if controller == "Controller 1":
+            triger.emit(A)
             time.sleep(2)
         elif controller == "Controller 2":
             time.sleep(2)
@@ -54,6 +65,10 @@ class Window(QtWidgets.QWidget):
     forwardClicked = QtCore.Signal(str)
     backwardClicked = QtCore.Signal(str)
 
+    @Slot(str)
+    def on_msg(txt): 
+        self.editcontrol.append(txt)
+    
     def __init__(self):
         super().__init__()
         self.CONTINUOUS_MOVE_SWITCH = False
@@ -66,6 +81,7 @@ class Window(QtWidgets.QWidget):
         self.thread = QtCore.QThread(self)
         self.thread.start()
         self.obj = Worker()
+        self.obj.triger.connect()
         self.obj.moveToThread(self.thread)
         self.leftClicked.connect(self.obj.moveLeftIncrement)
         self.rightClicked.connect(self.obj.moveRightIncrement)
@@ -128,8 +144,8 @@ class Window(QtWidgets.QWidget):
         print(error)
 
     def closeEvent(self, event):
-        self.thread.quit()
-        self.thread.wait()
+        self.thread.quit()        
+        self.thread.wait()        
         super(Window, self).closeEvent(event)
 
 if __name__ == '__main__':

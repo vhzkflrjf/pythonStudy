@@ -40,6 +40,7 @@ async def main2():
 
 begin = time()
 loop = asyncio.get_event_loop()          # 이벤트 루프를 얻음
+loop2 = asyncio.get_event_loop()
 loop.run_until_complete(main())          # main이 끝날 때까지 기다림
 loop.run_until_complete(main2())          # main이 끝날 때까지 기다림
 loop.close()                             # 이벤트 루프를 닫음
